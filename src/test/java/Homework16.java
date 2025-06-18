@@ -5,10 +5,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.time.Duration;
 
-public class Homework16 extends  BaseTest {
+public class Homework16 extends  BaseTest{
     static WebDriver driver;
 
     @Test
@@ -18,14 +17,15 @@ public class Homework16 extends  BaseTest {
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
         String url = "https://qa.koel.app/";
         driver.get(url);
 
         WebElement registrationLink = driver.findElement(By.cssSelector("a[href='registration']"));
         registrationLink.click();
 
-        WebElement registrationPage = driver.findElement(By.cssSelector("span[class=\"small\"]"));
-        Assert.assertTrue(registrationPage.isDisplayed());
+        String registrationUrl = "https://qa.koel.app/registration";
+        Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
 
         driver.quit();
     }
