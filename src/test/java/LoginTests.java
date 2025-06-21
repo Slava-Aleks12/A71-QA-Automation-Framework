@@ -25,48 +25,25 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginValidEmailPassword() throws InterruptedException {
-        //Test Steps
-        //Step 1 navigate to koel app
+    public void loginEmptyPassword() throws InterruptedException {
+
         navigateUrl();
-        //Step 2 enter email
-        provideEmail("kelly.wade@testpro.io");
-        //Step 3 enter password
-        providePassword("P!990109189300ok");
-        //Step 4 click submit button
+        provideEmail("iaroslav.aleksandrov@testpro.io");
         clickSubmit();
         Thread.sleep(2000);
-        //Step 5 verify user is logged in
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+    }
+
+    @Test
+    public void loginValidEmailPassword() throws InterruptedException {
+
+        navigateUrl();
+        provideEmail("iaroslav.aleksandrov@testpro.io");
+        providePassword("iTedHBsr");
+        clickSubmit();
+        Thread.sleep(2000);
         WebElement avatar = driver.findElement(By.cssSelector("img[class='avatar']"));
         Assert.assertTrue(avatar.isDisplayed());
-    }
-    @Test
-    public void changeProfileName() throws InterruptedException {
-
-        //Navigate to Koel app
-        navigateUrl();
-        //provide email
-        provideEmail("iaroslav.aleksandrov@testpro.io");
-        //provide password
-        providePassword("iTedHBsr");
-        //click submit
-        clickSubmit();
-        String randomName = randomName();
-        //pause for 2 seconds for page to load
-        Thread.sleep(2000);
-        //click avatar icon to go to profile setting page
-        clickAvatarIcon();
-        //provide current Password
-        provideCurrentPassword("P!990109189300ok");
-        //provide profile name
-        provideProfileName(randomName);
-        //click save button
-        clickSaveButton();
-        //wait 2 seconds
-        Thread.sleep(2000);
-        //verify profile name change
-        WebElement actualProfileName = driver.findElement(By.cssSelector("span[class='name']"));
-        Assert.assertEquals(actualProfileName.getText(),randomName);
     }
 
 }

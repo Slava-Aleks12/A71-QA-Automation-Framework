@@ -4,12 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.UUID;
+
 
 
 public class BaseTest {
@@ -36,11 +38,12 @@ public class BaseTest {
         driver.quit();
     }
 
-
+    // Step 4
     public void navigateUrl() {
         driver.get(url);
     }
 
+    // Step 5
     public void provideEmail(String email) {
         WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
         emailField.clear();
@@ -56,66 +59,44 @@ public class BaseTest {
     public void clickSubmit() {
         WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
         submit.click();
+
     }
 
-    public String randomName() {
-        return UUID.randomUUID().toString().replace("-","");
-    }
-
-    public void clickAvatarIcon(){
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
-        avatarIcon.click();
-    }
-
-    public void provideCurrentPassword(String Password) {
-        WebElement currentPassword = driver.findElement(By.cssSelector("[name='current_password']"));
-        currentPassword.sendKeys(Password);
-    }
-
-    public void provideProfileName(String randomName) {
-        WebElement profileNameField = driver.findElement(By.cssSelector("[name='name']"));
-        profileNameField.clear();
-        profileNameField.sendKeys(randomName);
-    }
-
-    public void clickSaveButton() {
-        WebElement saveButton = driver.findElement(By.cssSelector("button.btn-submit"));
-        saveButton.click();
-    }
-
-    // Search for a song
+    // Step 6
     public void searchSong(String song) {
         WebElement searchField = driver.findElement(By.cssSelector("input[type='search']"));
         searchField.click();
         searchField.sendKeys(song);
     }
 
-    // Click 'View All' button to display search results
+    // Step 7
     public void clickViewAllBtn() {
         WebElement viewAllButton = driver.findElement(By.cssSelector("button[data-test='view-all-songs-btn']"));
         viewAllButton.click();
     }
 
-    // Click the first song in the search results
+    // Step 8
     public void selectFirstSong() {
         WebElement firstSong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//tr[@class='song-item'][1]"));
         firstSong.click();
     }
 
-    // Click the 'ADD TO...' button
+    // Step 9
     public void clickAddToBtn() {
         WebElement addToBtn = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//button[@class='btn-add-to']"));
         addToBtn.click();
     }
 
-    // Choose the playlist to add selected song to
+    // Step 10
     public void selectPlaylist() {
-        WebElement playlist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(), 'Second User Playlist')]"));
+        WebElement playlist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(), 'My Playlist')]"));
         playlist.click();
     }
 
-    public String getAddToPlaylistSuccessMsg()  {
+    // Step 11
+    public String getAddToPlaylistSuccessMsg() {
         WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
         return notification.getText();
     }
+
 }
